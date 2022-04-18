@@ -20,15 +20,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   selectedProgram = AffordabilityProgram.All;
   totalUnitCount: number = 0;
   affordableUnitCount: number = 0;
-  graph = {
-    data: [{
-      values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      labels: ['District 1', 'District 2', 'District 3', 'District 4', 'District 5', 'District 6', 'District 7', 'District 8', 'District 9', 'District 10'],
-      type: 'pie',
-      sort: false
-    }],
-    layout: {width: 600, height: 400, title: 'Affordable Units By District'}
-};
+  startDate: string = '';
+  endDate: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -50,7 +43,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   getData(): void {
-    this.dataService.getHousingData(this.selectedProgram).subscribe(data => {
+    this.dataService.getHousingData(this.selectedProgram, this.startDate, this.endDate).subscribe(data => {
       this.dataSource.data = data;
       var totalUnitCount: number = 0;
       var affordableUnitCount: number = 0;
@@ -72,7 +65,7 @@ export class AppComponent implements OnInit, AfterViewInit {
             unitsByDistrict[district - 1] = unitsByDistrict[district - 1] + Number(project.total_affordable_units);
           }
         }
-        this.graph.data[0].values = unitsByDistrict;
+        // this.graph.data[0].values = unitsByDistrict;
       });
       this.totalUnitCount = totalUnitCount;
       this.affordableUnitCount = affordableUnitCount;
@@ -92,5 +85,14 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   removeNumberFromStatus(status: string): string {
     return status.substring(3);
+  }
+  
+  startDateChanged(date: string) {
+    this.startDate = date;
+  }
+
+  endDateChanged(date: string) {
+    this.endDate = date;
+    this.getData();
   }
 }
