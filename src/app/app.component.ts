@@ -46,31 +46,25 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.dataService.getHousingData(this.selectedProgram, this.startDate, this.endDate).subscribe(data => {
       const dataWithoutDuplicates = [...new Map(data.map(v => [v.austin_housing_inventory_id, v])).values()]
       this.dataSource.data = dataWithoutDuplicates;
-      var totalUnitCount: number = 0;
-      var affordableUnitCount: number = 0;
-      var unitsByDistrict: number[] = [];
-
-      for (var i = 1; i < 10; i++) {
-        unitsByDistrict.push(0);
-      }
-      dataWithoutDuplicates.forEach(project => {
-        if (Number(project.total_units)) {
-          totalUnitCount = totalUnitCount + Number(project.total_units);
-        }
-        if (Number(project.total_affordable_units))
-        {
-          affordableUnitCount = affordableUnitCount + Number(project.total_affordable_units);
-          if (Number(project.council_district))
-          {
-            var district = Number(project.council_district);
-            unitsByDistrict[district - 1] = unitsByDistrict[district - 1] + Number(project.total_affordable_units);
-          }
-        }
-        // this.graph.data[0].values = unitsByDistrict;
-      });
-      this.totalUnitCount = totalUnitCount;
-      this.affordableUnitCount = affordableUnitCount;
+      this.updateUnitTotals();
     });
+  }
+
+  updateUnitTotals(): void {
+    var totalUnitCount: number = 0;
+    var affordableUnitCount: number = 0;
+
+    this.dataSource.filteredData.forEach(project => {
+      if (Number(project.total_units)) {
+        totalUnitCount = totalUnitCount + Number(project.total_units);
+      }
+      if (Number(project.total_affordable_units))
+      {
+        affordableUnitCount = affordableUnitCount + Number(project.total_affordable_units);
+      }
+    });
+    this.totalUnitCount = totalUnitCount;
+    this.affordableUnitCount = affordableUnitCount;
   }
 
   getMapLink(address: string): string {
@@ -87,6 +81,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.updateUnitTotals();
   }
 
   removeNumberFromStatus(status: string): string {
