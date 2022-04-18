@@ -11,4 +11,5 @@ export interface Project {
 	longitude: number;
 	latitude: number;
 	address: string;
+	affordability_start_date: string;
 }

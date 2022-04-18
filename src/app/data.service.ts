@@ -17,7 +17,7 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  getHousingData(selectedProgram: AffordabilityProgram, startDate: string, endDate: string): Observable<Project[]> {
+  getHousingData(selectedProgram: AffordabilityProgram): Observable<Project[]> {
     var url = this.baseUrl;
     if (selectedProgram != AffordabilityProgram.All) {
       var program = Object.entries(AffordabilityProgram).find(([, value]) => value === selectedProgram);
@@ -26,22 +26,6 @@ export class DataService {
         url = url + '&' + program[0] + '=Yes';
       }
     }
-    if (startDate && endDate)
-    {
-      var formattedDate = this.formatDate(startDate);
-      url = url + '&$where=affordability_start_date>\'' + formattedDate + '\'' +
-      'AND affordability_start_date<\'' + formattedDate + '\'';
-    }
     return this.http.get<Project[]>(url);
-  }
-
-  private formatDate(date: string): string {
-    var dateArray = date.split("/");
-      var year = dateArray[2];
-      var month = dateArray[1];
-      var day = dateArray[0];
-      if (month.length == 1) month = 0 + month;
-      if (day.length == 1) day = 0 + day;
-      return year + month + day;
   }
 }

@@ -44,19 +44,20 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   getData(): void {
-    this.dataService.getHousingData(this.selectedProgram, this.startDate, this.endDate).subscribe(data => {
+    this.dataService.getHousingData(this.selectedProgram).subscribe(data => {
       const dataWithoutDuplicates = [...new Map(data.map(v => [v.austin_housing_inventory_id, v])).values()];
-      var filteredData: Project[] = [];
-      dataWithoutDuplicates.forEach(project => {
-        if (!this.includePipeline) {
-          if (project.status?.startsWith('7') || project.status?.startsWith('8'))
-          {
-            filteredData.push(project);
-          }
-        } else {
-          filteredData.push(project);
-        }
-      })
+      var filteredData = dataWithoutDuplicates;
+      if (!this.includePipeline) {
+        filteredData = filteredData.filter(project => project.status?.startsWith('7') || project.status?.startsWith('8'));
+      }
+      if (this.startDate) {
+        var date = this.formatDate(this.startDate);
+        filteredData = filteredData.filter(project => project.affordability_start_date > date);
+      }
+      if (this.endDate) {
+        var date = this.formatDate(this.endDate);
+        filteredData = filteredData.filter(project => project.affordability_start_date < date);
+      }
       this.dataSource.data = filteredData;
       this.updateUnitTotals();
     });
@@ -114,5 +115,15 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   onIncludePipeline(includePipeline: boolean) {
     this.includePipeline = includePipeline;
+  }
+
+  private formatDate(date: string): string {
+    var dateArray = date.split("/");
+      var year = dateArray[2];
+      var month = dateArray[1];
+      var day = dateArray[0];
+      if (month.length == 1) month = 0 + month;
+      if (day.length == 1) day = 0 + day;
+      return year + month + day;
   }
 }
