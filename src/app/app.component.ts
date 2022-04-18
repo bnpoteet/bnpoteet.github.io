@@ -13,7 +13,7 @@ import { AffordabilityProgram } from './affordability-program';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['project_name', 'address', 'total_units', 'total_affordable_units'];
+  displayedColumns: string[] = ['project_name', 'address', 'total_units', 'total_affordable_units', 'status'];
   dataSource = new MatTableDataSource<Project>();
   affordabilityPrograms = Object.values(AffordabilityProgram);
   selectedProgram = AffordabilityProgram.All;
