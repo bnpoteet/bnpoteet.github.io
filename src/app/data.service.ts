@@ -10,7 +10,7 @@ import { AffordabilityProgram } from './affordability-program';
 })
 export class DataService {
 
-  private baseUrl: string = 'https://data.austintexas.gov/resource/x5p7-qyuv.json?';
+  private baseUrl: string = 'https://data.austintexas.gov/resource/x5p7-qyuv.json?$$app_token=XnQQN0xB4sYYLXsIOzt6WFG6I';
 
   constructor(private http: HttpClient) { }
 
@@ -20,10 +20,9 @@ export class DataService {
       var program = Object.entries(AffordabilityProgram).find(([, value]) => value === selectedProgram);
       if (program != undefined)
       {
-        url = url + program[0] + '=Yes&';
+        url = url + '&' + program[0] + '=Yes&';
       }
     }
-    console.log(url);
     return this.http.get<Project[]>(url);
   }
 }
