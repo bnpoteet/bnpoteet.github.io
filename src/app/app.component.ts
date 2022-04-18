@@ -58,7 +58,6 @@ export class AppComponent implements OnInit, AfterViewInit {
       for (var i = 1; i < 10; i++) {
         unitsByDistrict.push(0);
       }
-      console.log(unitsByDistrict);
       data.forEach(project => {
         if (Number(project.total_units)) {
           totalUnitCount = totalUnitCount + Number(project.total_units);
