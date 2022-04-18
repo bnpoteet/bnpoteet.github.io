@@ -89,4 +89,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  removeNumberFromStatus(status: string): string {
+    return status.substring(3);
+  }
 }
