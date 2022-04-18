@@ -10,7 +10,10 @@ import { AffordabilityProgram } from './affordability-program';
 })
 export class DataService {
 
-  private baseUrl: string = 'https://data.austintexas.gov/resource/x5p7-qyuv.json?$$app_token=XnQQN0xB4sYYLXsIOzt6WFG6I';
+  private baseUrl: string = 
+    'https://data.austintexas.gov/resource/x5p7-qyuv.json' + 
+    '?$$app_token=XnQQN0xB4sYYLXsIOzt6WFG6I' +
+    '&$limit=5000';
 
   constructor(private http: HttpClient) { }
 
