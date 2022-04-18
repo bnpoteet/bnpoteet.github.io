@@ -14,6 +14,7 @@
 						</mat-option>
 					</mat-select>
 				</mat-form-field>
+
 				<mat-form-field appearance="fill">
 					<mat-label>Enter a date range</mat-label>
 					<mat-date-range-input [rangePicker]="picker">
@@ -23,7 +24,8 @@
 					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 					<mat-date-range-picker #picker></mat-date-range-picker>
 				</mat-form-field>
-				<mat-checkbox>Include projects in planning and under construction</mat-checkbox>
+
+				<mat-checkbox [checked]="includePipeline" (change)="onIncludePipeline($event.checked)">Include projects in planning and under construction</mat-checkbox>
 			</mat-card-content>
 			<mat-card-actions>
 				<button mat-button (click)="getData()">Query</button>

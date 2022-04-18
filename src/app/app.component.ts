@@ -22,6 +22,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   affordableUnitCount: number = 0;
   startDate: string = '';
   endDate: string = '';
+  includePipeline = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -44,8 +45,19 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   getData(): void {
     this.dataService.getHousingData(this.selectedProgram, this.startDate, this.endDate).subscribe(data => {
-      const dataWithoutDuplicates = [...new Map(data.map(v => [v.austin_housing_inventory_id, v])).values()]
-      this.dataSource.data = dataWithoutDuplicates;
+      const dataWithoutDuplicates = [...new Map(data.map(v => [v.austin_housing_inventory_id, v])).values()];
+      var filteredData: Project[] = [];
+      dataWithoutDuplicates.forEach(project => {
+        if (!this.includePipeline) {
+          if (project.status?.startsWith('7') || project.status?.startsWith('8'))
+          {
+            filteredData.push(project);
+          }
+        } else {
+          filteredData.push(project);
+        }
+      })
+      this.dataSource.data = filteredData;
       this.updateUnitTotals();
     });
   }
@@ -98,5 +110,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   endDateChanged(date: string) {
     this.endDate = date;
+  }
+
+  onIncludePipeline(includePipeline: boolean) {
+    this.includePipeline = includePipeline;
   }
 }
