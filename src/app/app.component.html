@@ -11,6 +11,11 @@
 	<div>Affordable Units: {{ affordableUnitCount | number }}</div>
 	<div>Total Units: {{ totalUnitCount | number }}</div>
 	<div>
+		<mat-form-field appearance="standard">
+			<mat-label>Filter</mat-label>
+			<input matInput (keyup)="applyFilter($event)" #input>
+		</mat-form-field>
+
 		<table mat-table [dataSource]="dataSource" matSort>
 	
 			<ng-container matColumnDef="project_name">

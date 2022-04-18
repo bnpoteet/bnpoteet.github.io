@@ -84,4 +84,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     var encodedAddress = address.replace(/\s/g, '+');
     return baseUrl + encodedAddress + '+austin+tx';
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
