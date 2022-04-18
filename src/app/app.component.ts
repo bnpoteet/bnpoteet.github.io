@@ -98,6 +98,5 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   endDateChanged(date: string) {
     this.endDate = date;
-    this.getData();
   }
 }
