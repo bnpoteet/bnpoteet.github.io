@@ -1,4 +1,5 @@
 export interface Project {
+	austin_housing_inventory_id: string;
 	developer: string;
 	project_name: string;
 	market_rate_units: number;

@@ -44,7 +44,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   getData(): void {
     this.dataService.getHousingData(this.selectedProgram, this.startDate, this.endDate).subscribe(data => {
-      this.dataSource.data = data;
+      const dataWithoutDuplicates = [...new Map(data.map(v => [v.austin_housing_inventory_id, v])).values()]
+      this.dataSource.data = dataWithoutDuplicates;
       var totalUnitCount: number = 0;
       var affordableUnitCount: number = 0;
       var unitsByDistrict: number[] = [];
@@ -52,7 +53,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       for (var i = 1; i < 10; i++) {
         unitsByDistrict.push(0);
       }
-      data.forEach(project => {
+      dataWithoutDuplicates.forEach(project => {
         if (Number(project.total_units)) {
           totalUnitCount = totalUnitCount + Number(project.total_units);
         }
@@ -73,9 +74,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   getMapLink(address: string): string {
-    var baseUrl = 'https://www.google.com/maps/search/?api=1&query=';
-    var encodedAddress = address.replace(/\s/g, '+');
-    return baseUrl + encodedAddress + '+austin+tx';
+    if (address) {
+      var baseUrl = 'https://www.google.com/maps/search/?api=1&query=';
+      var encodedAddress = address.replace(/\s/g, '+');
+      return baseUrl + encodedAddress + '+austin+tx';
+    } else {
+      return '';
+    }
+
   }
 
   applyFilter(event: Event) {
@@ -84,7 +90,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   removeNumberFromStatus(status: string): string {
-    return status.substring(3);
+    if (status) {
+      return status.substring(3);
+    } else {
+      return '';
+    }
   }
   
   startDateChanged(date: string) {
