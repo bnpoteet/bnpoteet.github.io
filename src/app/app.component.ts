@@ -78,4 +78,10 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.affordableUnitCount = affordableUnitCount;
     });
   }
+
+  getMapLink(address: string): string {
+    var baseUrl = 'https://www.google.com/maps/search/?api=1&query=';
+    var encodedAddress = address.replace(/\s/g, '+');
+    return baseUrl + encodedAddress + '+austin+tx';
+  }
 }
