@@ -37,7 +37,7 @@
 			<input matInput (keyup)="applyFilter($event)" #input>
 		</mat-form-field>
 
-		<table mat-table [dataSource]="dataSource" matSort>
+		<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 	
 			<ng-container matColumnDef="project_name">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> Project Name </th>

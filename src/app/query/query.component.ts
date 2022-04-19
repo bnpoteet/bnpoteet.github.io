@@ -6,12 +6,14 @@ import { MatSort } from '@angular/material/sort';
 import { DataService } from '../data.service';
 import { Project } from '../project';
 import { AffordabilityProgram } from '../affordability-program';
+
 @Component({
   selector: 'app-query',
   templateUrl: './query.component.html',
   styleUrls: ['./query.component.scss']
 })
-export class QueryComponent implements OnInit {
+
+export class QueryComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['project_name', 'total_units', 'total_affordable_units', 'address', 'status'];
   footerColumns: string[] = ['project_name', 'total_units', 'total_affordable_units'];
   dataSource = new MatTableDataSource<Project>();
@@ -25,7 +27,6 @@ export class QueryComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
 
   constructor(private dataService: DataService) { }
 
