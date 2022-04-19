@@ -16,7 +16,7 @@ import { MatSort } from '@angular/material/sort';
 export class SummaryComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Statistics>();
   statistics: Statistics[] = [];
-  displayedColumns: string[] = ['affordabilityProgram', 'totalUnits', 'totalAffordableUnits', 'projectCount'];
+  displayedColumns: string[] = ['affordabilityProgram', 'totalUnits', 'totalAffordableUnits', 'inProgressUnits', 'projectCount', 'inProgressProjects'];
   vmuProjects: Project[] = [];
   universityProjects: Project[] = [];
   downtownProjects: Project[] = [];
@@ -64,24 +64,37 @@ export class SummaryComponent implements OnInit, AfterViewInit {
   }
 
   private parseProgramData(programData: Project[], program: AffordabilityProgram): void {
-    var totalUnitCount: number = 0;
-    var affordableUnitCount: number = 0;
+    var constructedUnits: number = 0;
+    var constructedAffordableUnits: number = 0;
+    var inProgress = programData.filter(project => !project.status?.startsWith('7') && !project.status?.startsWith('8'));
+    var completed = programData.filter(project => project.status?.startsWith('7') || project.status?.startsWith('8'));
 
-    programData.forEach(project => {
+    completed.forEach(project => {
       if (Number(project.total_units)) {
-        totalUnitCount = totalUnitCount + Number(project.total_units);
+        constructedUnits = constructedUnits + Number(project.total_units);
       }
       if (Number(project.total_affordable_units))
       {
-        affordableUnitCount = affordableUnitCount + Number(project.total_affordable_units);
+        constructedAffordableUnits = constructedAffordableUnits + Number(project.total_affordable_units);
       }
     });
 
+    var inProgressUnits: number = 0;
+    inProgress.forEach(project => {
+      if (Number(project.total_units)) {
+        inProgressUnits = inProgressUnits + Number(project.total_units);
+      }
+    });
+
+    var inProgress = programData.filter(project => !project.status?.startsWith('7') && !project.status?.startsWith('8'));
+
     this.statistics.push({
       program: program,
-      projectCount: programData.length,
-      unitCount: totalUnitCount,
-      affordableUnitCount: affordableUnitCount
+      constructedProjects: completed.length,
+      constructedUnits: constructedUnits,
+      constructedAffordableUnits: constructedAffordableUnits,
+      inProgressProjects: inProgress.length,
+      inProgressUnits: inProgressUnits
     });
   }
 }

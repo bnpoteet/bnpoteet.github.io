@@ -2,7 +2,9 @@ import { AffordabilityProgram } from "./affordability-program";
 
 export interface Statistics {
 	program: AffordabilityProgram;
-	unitCount: number;
-	affordableUnitCount: number;
-	projectCount: number;
+	constructedUnits: number;
+	constructedAffordableUnits: number;
+	constructedProjects: number;
+	inProgressProjects: number;
+	inProgressUnits: number;
 }
