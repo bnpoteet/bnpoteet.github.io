@@ -19,4 +19,6 @@ export interface Project {
 	transit_oriented_development: string;
 	university_neighborhood_overla: string;
 	micro_unit_density_bonus: string;
+	calculated_fee_in_lieu: number;
+	fee_in_lieu_status: string;
 }

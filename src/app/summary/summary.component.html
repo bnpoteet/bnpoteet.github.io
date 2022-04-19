@@ -22,6 +22,11 @@
 			<td mat-cell class="unit" *matCellDef="let element"> {{element.constructedUnits | number}} </td>
 		</ng-container>
 
+		<ng-container matColumnDef="feeInLieu">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> Fee in Lieu </th>
+			<td mat-cell class="unit" *matCellDef="let element"> {{element.feeInLieu | currency}} </td>
+		</ng-container>
+
 		<ng-container matColumnDef="inProgressUnits">
 			<th mat-header-cell *matHeaderCellDef mat-sort-header> In Planning / Under Construction Units </th>
 			<td mat-cell class="unit" *matCellDef="let element"> {{element.inProgressUnits | number}} </td>

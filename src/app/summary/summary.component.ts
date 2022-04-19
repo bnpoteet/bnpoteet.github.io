@@ -16,7 +16,7 @@ import { MatSort } from '@angular/material/sort';
 export class SummaryComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Statistics>();
   statistics: Statistics[] = [];
-  displayedColumns: string[] = ['affordabilityProgram', 'totalUnits', 'totalAffordableUnits', 'inProgressUnits', 'projectCount', 'inProgressProjects'];
+  displayedColumns: string[] = ['affordabilityProgram', 'totalUnits', 'totalAffordableUnits', 'projectCount', 'feeInLieu', 'inProgressUnits', 'inProgressProjects'];
   vmuProjects: Project[] = [];
   universityProjects: Project[] = [];
   downtownProjects: Project[] = [];
@@ -64,8 +64,9 @@ export class SummaryComponent implements OnInit, AfterViewInit {
   }
 
   private parseProgramData(programData: Project[], program: AffordabilityProgram): void {
-    var constructedUnits: number = 0;
-    var constructedAffordableUnits: number = 0;
+    var constructedUnits = 0;
+    var constructedAffordableUnits = 0;
+    var feeInLieu = 0;
     var inProgress = programData.filter(project => !project.status?.startsWith('7') && !project.status?.startsWith('8'));
     var completed = programData.filter(project => project.status?.startsWith('7') || project.status?.startsWith('8'));
 
@@ -76,6 +77,9 @@ export class SummaryComponent implements OnInit, AfterViewInit {
       if (Number(project.total_affordable_units))
       {
         constructedAffordableUnits = constructedAffordableUnits + Number(project.total_affordable_units);
+      }
+      if (Number(project.calculated_fee_in_lieu)) {
+        feeInLieu = feeInLieu + Number(project.calculated_fee_in_lieu);
       }
     });
 
@@ -94,7 +98,8 @@ export class SummaryComponent implements OnInit, AfterViewInit {
       constructedUnits: constructedUnits,
       constructedAffordableUnits: constructedAffordableUnits,
       inProgressProjects: inProgress.length,
-      inProgressUnits: inProgressUnits
+      inProgressUnits: inProgressUnits,
+      feeInLieu: feeInLieu
     });
   }
 }
