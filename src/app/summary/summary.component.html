@@ -9,17 +9,17 @@
 	
 		<ng-container matColumnDef="projectCount">
 			<th mat-header-cell *matHeaderCellDef mat-sort-header> Project Count </th>
-			<td mat-cell class="unit" *matCellDef="let element"> {{element.projectCount}} </td>
+			<td mat-cell class="unit" *matCellDef="let element"> {{element.projectCount | number}} </td>
 		</ng-container>
 	
 		<ng-container matColumnDef="totalAffordableUnits">
 			<th mat-header-cell *matHeaderCellDef mat-sort-header> Affordable Unit Count </th>
-			<td mat-cell class="unit" *matCellDef="let element"> {{element.unitCount}} </td>
+			<td mat-cell class="unit" *matCellDef="let element"> {{element.unitCount | number}} </td>
 		</ng-container>
 	
 		<ng-container matColumnDef="totalUnits">
 			<th mat-header-cell *matHeaderCellDef mat-sort-header> Total Unit Count </th>
-			<td mat-cell class="unit" *matCellDef="let element"> {{element.affordableUnitCount}} </td>
+			<td mat-cell class="unit" *matCellDef="let element"> {{element.affordableUnitCount | number}} </td>
 		</ng-container>
 	
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
