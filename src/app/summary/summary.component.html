@@ -1,26 +1,30 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+<body>
+	<h1>Affordability Program Summary</h1>	
+	<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
-  <ng-container matColumnDef="affordabilityProgram">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Affordability Program </th>
-    <td mat-cell *matCellDef="let element"> {{element.program}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="projectCount">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Count </th>
-    <td mat-cell class="unit" *matCellDef="let element"> {{element.projectCount}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="totalAffordableUnits">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Affordable Unit Count </th>
-    <td mat-cell class="unit" *matCellDef="let element"> {{element.unitCount}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="totalUnits">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Unit Count </th>
-    <td mat-cell class="unit" *matCellDef="let element"> {{element.affordableUnitCount}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row class="unit" *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
+		<ng-container matColumnDef="affordabilityProgram">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> Affordability Program </th>
+			<td mat-cell *matCellDef="let element"> {{element.program}} </td>
+		</ng-container>
+	
+		<ng-container matColumnDef="projectCount">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> Project Count </th>
+			<td mat-cell class="unit" *matCellDef="let element"> {{element.projectCount}} </td>
+		</ng-container>
+	
+		<ng-container matColumnDef="totalAffordableUnits">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> Affordable Unit Count </th>
+			<td mat-cell class="unit" *matCellDef="let element"> {{element.unitCount}} </td>
+		</ng-container>
+	
+		<ng-container matColumnDef="totalUnits">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> Total Unit Count </th>
+			<td mat-cell class="unit" *matCellDef="let element"> {{element.affordableUnitCount}} </td>
+		</ng-container>
+	
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row class="unit" *matRowDef="let row; columns: displayedColumns;"></tr>
+	</table>
+	
+	
+</body>
