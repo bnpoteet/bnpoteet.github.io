@@ -18,8 +18,8 @@
 				<mat-form-field appearance="fill">
 					<mat-label>(Optional) Enter a date range</mat-label>
 					<mat-date-range-input [rangePicker]="picker">
-						<input #startRef matStartDate placeholder="Start date" (dateChange)="startDateChanged(startRef.value)">
-						<input #endRef matEndDate placeholder="End date" (dateChange)="endDateChanged(endRef.value)">
+						<input #startRef matStartDate placeholder="Start date" (dateChange)="onStartDateChanged(startRef.value)">
+						<input #endRef matEndDate placeholder="End date" (dateChange)="onEndDateChanged(endRef.value)">
 					</mat-date-range-input>
 					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 					<mat-date-range-picker #picker></mat-date-range-picker>
