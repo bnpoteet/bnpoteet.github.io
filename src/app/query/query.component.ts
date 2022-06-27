@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { DataService } from '../data.service';
 import { Project } from '../project';
 import { AffordabilityProgram } from '../affordability-program';
-import { Filter } from '../Filter';
+import { Filter } from '../filter';
 import { ProjectStatus } from '../project-status';
 
 @Component({
@@ -48,23 +48,22 @@ export class QueryComponent implements OnInit, AfterViewInit {
   getData(): void {
     this.dataService.getHousingData(this.selectedProgram).subscribe(data => {
       var filter: Filter = { 
-        statuses: []
+        statuses: [],
+        startDate: '',
+        endDate: ''
       }
       if (!this.includePipeline) {
         filter.statuses.push(
           ProjectStatus.ProjectCompleted, 
           ProjectStatus.AffordabilityExpired);
       }
-      var filteredData = this.dataService.filterHousingData(data, filter);
       if (this.startDate) {
-        var date = this.formatDate(this.startDate);
-        filteredData = filteredData.filter(project => project.affordability_start_date > date);
+        filter.startDate = this.formatDate(this.startDate);
       }
       if (this.endDate) {
-        var date = this.formatDate(this.endDate);
-        filteredData = filteredData.filter(project => project.affordability_start_date < date);
+        filter.endDate = this.formatDate(this.endDate);
       }
-      this.dataSource.data = filteredData;
+      this.dataSource.data = this.dataService.filterHousingData(data, filter);
       this.updateUnitTotals();
     });
   }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Project } from './project';
 import { AffordabilityProgram } from './affordability-program';
-import { Filter } from './Filter';
+import { Filter } from './filter';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +35,12 @@ export class DataService {
     var filteredProjects = dataWithoutDuplicates;
     if (filter.statuses.length > 0) {
       filteredProjects = filteredProjects.filter(project => project.status && filter.statuses.includes(project.status));
+    }
+    if (filter.startDate != '') {
+      filteredProjects = filteredProjects.filter(project => project.affordability_start_date > filter.startDate);
+    }
+    if (filter.endDate != '') {
+      filteredProjects = filteredProjects.filter(project => project.affordability_start_date < filter.endDate);
     }
     return filteredProjects;
   }
