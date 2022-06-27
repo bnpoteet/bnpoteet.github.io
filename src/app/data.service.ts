@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Project } from './project';
 import { AffordabilityProgram } from './affordability-program';
+import { Filter } from './Filter';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +30,12 @@ export class DataService {
     return this.http.get<Project[]>(url);
   }
 
-  filterHousingData(projects: Project[]): Project[] {
+  filterHousingData(projects: Project[], filter: Filter): Project[] {
     const dataWithoutDuplicates = [...new Map(projects.map(v => [v.austin_housing_inventory_id, v])).values()];
     var filteredProjects = dataWithoutDuplicates;
+    if (filter.statuses.length > 0) {
+      filteredProjects = filteredProjects.filter(project => project.status && filter.statuses.includes(project.status));
+    }
     return filteredProjects;
   }
 }

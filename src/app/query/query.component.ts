@@ -6,6 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { DataService } from '../data.service';
 import { Project } from '../project';
 import { AffordabilityProgram } from '../affordability-program';
+import { Filter } from '../Filter';
+import { ProjectStatus } from '../project-status';
 
 @Component({
   selector: 'app-query',
@@ -45,10 +47,15 @@ export class QueryComponent implements OnInit, AfterViewInit {
 
   getData(): void {
     this.dataService.getHousingData(this.selectedProgram).subscribe(data => {
-      var filteredData = this.dataService.filterHousingData(data);
-      if (!this.includePipeline) {
-        filteredData = filteredData.filter(project => project.status?.startsWith('7') || project.status?.startsWith('8'));
+      var filter: Filter = { 
+        statuses: []
       }
+      if (!this.includePipeline) {
+        filter.statuses.push(
+          ProjectStatus.ProjectCompleted, 
+          ProjectStatus.AffordabilityExpired);
+      }
+      var filteredData = this.dataService.filterHousingData(data, filter);
       if (this.startDate) {
         var date = this.formatDate(this.startDate);
         filteredData = filteredData.filter(project => project.affordability_start_date > date);
@@ -97,6 +104,7 @@ export class QueryComponent implements OnInit, AfterViewInit {
   }
 
   removeNumberFromStatus(status: string): string {
+    return status;
     if (status) {
       return status.substring(3);
     } else {
