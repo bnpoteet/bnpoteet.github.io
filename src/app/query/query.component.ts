@@ -45,8 +45,7 @@ export class QueryComponent implements OnInit, AfterViewInit {
 
   getData(): void {
     this.dataService.getHousingData(this.selectedProgram).subscribe(data => {
-      const dataWithoutDuplicates = [...new Map(data.map(v => [v.austin_housing_inventory_id, v])).values()];
-      var filteredData = dataWithoutDuplicates;
+      var filteredData = this.dataService.filterHousingData(data);
       if (!this.includePipeline) {
         filteredData = filteredData.filter(project => project.status?.startsWith('7') || project.status?.startsWith('8'));
       }

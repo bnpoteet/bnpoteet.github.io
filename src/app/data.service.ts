@@ -28,4 +28,10 @@ export class DataService {
     }
     return this.http.get<Project[]>(url);
   }
+
+  filterHousingData(projects: Project[]): Project[] {
+    const dataWithoutDuplicates = [...new Map(projects.map(v => [v.austin_housing_inventory_id, v])).values()];
+    var filteredProjects = dataWithoutDuplicates;
+    return filteredProjects;
+  }
 }
