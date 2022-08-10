@@ -20,13 +20,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SummaryComponent } from './summary/summary.component';
 import { QueryComponent } from './query/query.component';
 import { MapComponent } from './map/map.component';
+import { ProjectListComponent } from './project-list/project-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SummaryComponent,
     QueryComponent,
-    MapComponent
+    MapComponent,
+    ProjectListComponent
   ],
   imports: [
     BrowserModule,
