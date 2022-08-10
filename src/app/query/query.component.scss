@@ -6,6 +6,15 @@ body {
   margin: 10px;
 }
 
+h1 {
+  text-align: center;
+}
+
+a {
+  margin: auto;
+  max-width: 400px;
+  margin-bottom: 8px;}
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;
@@ -22,6 +31,7 @@ body {
 }
 
 mat-card {
+  margin: auto;
   max-width: 400px;
   margin-bottom: 8px;
 }
