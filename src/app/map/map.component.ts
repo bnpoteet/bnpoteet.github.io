@@ -1,8 +1,8 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { MapMarker } from '@angular/google-maps';
+import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 
 import { Project } from '../project';
 
@@ -14,6 +14,10 @@ import { Project } from '../project';
 export class MapComponent implements OnInit, OnChanges {
 
   @Input() projects: Project[] = [];
+
+  infoContent: string = "";
+
+  @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow|undefined;
 
   apiLoaded: Observable<boolean>;
 
@@ -39,22 +43,30 @@ export class MapComponent implements OnInit, OnChanges {
     this.updateMarkers();
   }
 
+  openInfo(marker: MapMarker, content: string) {
+    // this.infoContent = content;
+    this.infoContent = content;
+    if (this.infoWindow) {
+      this.infoWindow.open(marker);
+    }
+  }
+
   updateMarkers(){
     this.markers = []
     this.projects.forEach(project => {
-      this.addMarker(project.latitude, project.longitude);
+      this.addMarker(project.latitude, project.longitude, project.project_name);
     });
   }
 
-  addMarker(latitude: number, longitude: number) {
+  addMarker(latitude: number, longitude: number, projectName: string) {
     if (!isNaN(latitude)&& !isNaN(longitude)){
       this.markers.push({
         position: {
           lat: +latitude, 
           lng: +longitude,
         },
+        title: projectName
       } as MapMarker);
     }
   }
-
 }
