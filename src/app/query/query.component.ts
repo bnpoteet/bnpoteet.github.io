@@ -8,6 +8,7 @@ import { Project } from '../project';
 import { AffordabilityProgram } from '../affordability-program';
 import { Filter } from '../filter';
 import { ProjectStatus } from '../project-status';
+import { MapComponent } from '../map/map.component';
 
 @Component({
   selector: 'app-query',
@@ -26,6 +27,7 @@ export class QueryComponent implements OnInit, AfterViewInit {
   startDate: string = '';
   endDate: string = '';
   includePipeline = true;
+  projects: Project[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -64,6 +66,7 @@ export class QueryComponent implements OnInit, AfterViewInit {
         filter.endDate = this.formatDate(this.endDate);
       }
       this.dataSource.data = this.dataService.filterHousingData(data, filter);
+      this.projects = this.dataSource.data;
       this.updateUnitTotals();
     });
   }
@@ -104,11 +107,6 @@ export class QueryComponent implements OnInit, AfterViewInit {
 
   removeNumberFromStatus(status: string): string {
     return status;
-    if (status) {
-      return status.substring(3);
-    } else {
-      return '';
-    }
   }
   
   onStartDateChanged(date: string) {

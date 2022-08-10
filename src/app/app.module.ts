@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { GoogleMapsModule } from '@angular/google-maps';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -18,12 +19,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SummaryComponent } from './summary/summary.component';
 import { QueryComponent } from './query/query.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SummaryComponent,
-    QueryComponent
+    QueryComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { QueryComponent } from './query/query.component';
     MatCardModule,
     MatButtonModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
