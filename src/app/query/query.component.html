@@ -14,15 +14,24 @@
 						</mat-option>
 					</mat-select>
 				</mat-form-field>
-				<mat-form-field appearance="fill">
-					<mat-label>(Optional) Enter a date range</mat-label>
-					<mat-date-range-input [rangePicker]="picker">
-						<input #startRef matStartDate placeholder="Start date" (dateChange)="onStartDateChanged(startRef.value)">
-						<input #endRef matEndDate placeholder="End date" (dateChange)="onEndDateChanged(endRef.value)">
-					</mat-date-range-input>
-					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-					<mat-date-range-picker #picker></mat-date-range-picker>
-				</mat-form-field>
+				<div class="dates">
+					<mat-form-field appearance="fill">
+						<mat-label>Start Year</mat-label>
+						<mat-select [(value)]="selectedStartYear">
+							<mat-option *ngFor="let year of years" [value]="year">
+								{{year}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<mat-form-field appearance="fill">
+						<mat-label>End Year</mat-label>
+						<mat-select [(value)]="selectedEndYear">
+							<mat-option *ngFor="let year of years" [value]="year">
+								{{year}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
 				<mat-checkbox [checked]="includePipeline" (change)="onIncludePipeline($event.checked)">Include projects in planning and under construction</mat-checkbox>
 			</mat-card-content>
 			<mat-card-actions align="end">

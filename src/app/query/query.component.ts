@@ -14,6 +14,9 @@ import { ProjectStatus } from '../project-status';
 
 export class QueryComponent implements OnInit {
   affordabilityPrograms = Object.values(AffordabilityProgram);
+  years: number[] = [];
+  selectedStartYear = 0;
+  selectedEndYear = 0;
   selectedProgram = AffordabilityProgram.All;
   totalUnitCount: number = 0;
   affordableUnitCount: number = 0;
@@ -25,7 +28,16 @@ export class QueryComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.getYears();
     this.getData();
+  }
+
+  getYears() {
+    for (let i = 1984; i < 2023; i++) {
+      this.years.push(i);
+    } 
+    this.selectedStartYear = this.years[0];
+    this.selectedEndYear = this.years[this.years.length - 1];
   }
 
   onFilterChanged() {
@@ -44,11 +56,11 @@ export class QueryComponent implements OnInit {
           ProjectStatus.ProjectCompleted, 
           ProjectStatus.AffordabilityExpired);
       }
-      if (this.startDate) {
-        filter.startDate = this.formatDate(this.startDate);
+      if (this.selectedStartYear !== 1984) {
+        filter.startDate = this.selectedStartYear.toString() + '0101';
       }
-      if (this.endDate) {
-        filter.endDate = this.formatDate(this.endDate);
+      if (this.selectedEndYear !== new Date().getFullYear()) {
+        filter.endDate = this.selectedEndYear.toString() + '1231';
       }
       this.projects = this.dataService.filterHousingData(data, filter);
     });
@@ -66,13 +78,7 @@ export class QueryComponent implements OnInit {
     this.includePipeline = includePipeline;
   }
 
-  private formatDate(date: string): string {
-    var dateArray = date.split("/");
-      var year = dateArray[2];
-      var month = dateArray[1];
-      var day = dateArray[0];
-      if (month.length == 1) month = 0 + month;
-      if (day.length == 1) day = 0 + day;
-      return year + month + day;
+  private formatDate(year: number): string {
+    return year.toString().slice(0) + '0101';
   }
 }
