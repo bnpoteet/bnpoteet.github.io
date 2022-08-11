@@ -44,7 +44,6 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   openInfo(marker: MapMarker, content: string) {
-    // this.infoContent = content;
     this.infoContent = content;
     if (this.infoWindow) {
       this.infoWindow.open(marker);

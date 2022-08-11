@@ -77,8 +77,4 @@ export class QueryComponent implements OnInit {
   onIncludePipeline(includePipeline: boolean) {
     this.includePipeline = includePipeline;
   }
-
-  private formatDate(year: number): string {
-    return year.toString().slice(0) + '0101';
-  }
 }

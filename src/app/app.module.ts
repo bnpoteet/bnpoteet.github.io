@@ -22,6 +22,8 @@ import { SummaryComponent } from './summary/summary.component';
 import { QueryComponent } from './query/query.component';
 import { MapComponent } from './map/map.component';
 import { ProjectListComponent } from './project-list/project-list.component';
+import { NgChartsModule } from 'ng2-charts';
+import { ChartsComponent } from './charts/charts.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { ProjectListComponent } from './project-list/project-list.component';
     SummaryComponent,
     QueryComponent,
     MapComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    ChartsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { ProjectListComponent } from './project-list/project-list.component';
     MatCheckboxModule,
     MatTabsModule,
     FormsModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
