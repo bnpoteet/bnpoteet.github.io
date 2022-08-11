@@ -23,6 +23,7 @@ export class SummaryComponent implements OnInit, AfterViewInit {
   raineyProjects: Project[] = [];
   transitProjects: Project[] = [];
   auProjects: Project[] = [];
+  riversideProjects: Project[] = [];
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -58,6 +59,9 @@ export class SummaryComponent implements OnInit, AfterViewInit {
 
       this.universityProjects = dataWithoutDuplicates.filter(project => project.university_neighborhood_overla === 'Yes');
       this.parseProgramData(this.universityProjects, AffordabilityProgram.university_neighborhood_overla);
+
+      this.riversideProjects = dataWithoutDuplicates.filter(project => project.east_riverside_corridor_partn === 'Yes');
+      this.parseProgramData(this.riversideProjects, AffordabilityProgram.east_riverside_corridor_partn);
 
       this.dataSource.data = this.statistics;
     });
