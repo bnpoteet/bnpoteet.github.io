@@ -61,9 +61,9 @@ export class ProjectListComponent implements OnInit, OnChanges, AfterViewInit {
       if (Number(project.total_units)) {
         totalUnitCount = totalUnitCount + Number(project.total_units);
       }
-      if (Number(project.total_affordable_units))
+      if (Number(project.affordable_units))
       {
-        affordableUnitCount = affordableUnitCount + Number(project.total_affordable_units);
+        affordableUnitCount = affordableUnitCount + Number(project.affordable_units);
       }
     });
     this.totalUnitCount = totalUnitCount;

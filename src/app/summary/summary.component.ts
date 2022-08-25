@@ -40,7 +40,7 @@ export class SummaryComponent implements OnInit, AfterViewInit {
 
   private getData(): void {
     this.dataService.getHousingData(AffordabilityProgram.All).subscribe(data => {
-      const dataWithoutDuplicates = [...new Map(data.map(v => [v.austin_housing_inventory_id, v])).values()];
+      const dataWithoutDuplicates = [...new Map(data.map(v => [v.project_id, v])).values()];
 
       this.vmuProjects = dataWithoutDuplicates.filter(project => project.vertical_mixed_use === 'Yes');
       this.parseProgramData(this.vmuProjects, AffordabilityProgram.vertical_mixed_use);
@@ -71,16 +71,16 @@ export class SummaryComponent implements OnInit, AfterViewInit {
     var constructedUnits = 0;
     var constructedAffordableUnits = 0;
     var feeInLieu = 0;
-    var inProgress = programData.filter(project => !project.status?.startsWith('7') && !project.status?.startsWith('8'));
-    var completed = programData.filter(project => project.status?.startsWith('7') || project.status?.startsWith('8'));
+    var inProgress = programData.filter(project => !project.development_status?.startsWith('7') && !project.development_status?.startsWith('8'));
+    var completed = programData.filter(project => project.development_status?.startsWith('7') || project.development_status?.startsWith('8'));
 
     completed.forEach(project => {
       if (Number(project.total_units)) {
         constructedUnits = constructedUnits + Number(project.total_units);
       }
-      if (Number(project.total_affordable_units))
+      if (Number(project.affordable_units))
       {
-        constructedAffordableUnits = constructedAffordableUnits + Number(project.total_affordable_units);
+        constructedAffordableUnits = constructedAffordableUnits + Number(project.affordable_units);
       }
       if (Number(project.calculated_fee_in_lieu)) {
         feeInLieu = feeInLieu + Number(project.calculated_fee_in_lieu);
@@ -94,7 +94,7 @@ export class SummaryComponent implements OnInit, AfterViewInit {
       }
     });
 
-    var inProgress = programData.filter(project => !project.status?.startsWith('7') && !project.status?.startsWith('8'));
+    var inProgress = programData.filter(project => !project.development_status?.startsWith('7') && !project.development_status?.startsWith('8'));
 
     this.statistics.push({
       program: program,

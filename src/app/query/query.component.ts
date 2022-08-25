@@ -46,6 +46,7 @@ export class QueryComponent implements OnInit {
 
   getData(): void {
     this.dataService.getHousingData(this.selectedProgram).subscribe(data => {
+      console.log(data);
       var filter: Filter = { 
         statuses: [],
         startDate: '',
