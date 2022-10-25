@@ -1,11 +1,6 @@
 <body>
 	<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
-		<ng-container matColumnDef="affordabilityProgram">
-			<th mat-header-cell *matHeaderCellDef mat-sort-header> Affordability Program </th>
-			<td mat-cell *matCellDef="let element"> {{element.program}} </td>
-		</ng-container>
-	
 		<ng-container matColumnDef="projectCount">
 			<th mat-header-cell *matHeaderCellDef mat-sort-header> Completed Projects </th>
 			<td mat-cell class="unit" *matCellDef="let element"> {{element.constructedProjects | number}} </td>
@@ -19,11 +14,6 @@
 		<ng-container matColumnDef="totalUnits">
 			<th mat-header-cell *matHeaderCellDef mat-sort-header> Completed Units </th>
 			<td mat-cell class="unit" *matCellDef="let element"> {{element.constructedUnits | number}} </td>
-		</ng-container>
-
-		<ng-container matColumnDef="feeInLieu">
-			<th mat-header-cell *matHeaderCellDef mat-sort-header> Fee in Lieu </th>
-			<td mat-cell class="unit" *matCellDef="let element"> {{element.feeInLieu | currency}} </td>
 		</ng-container>
 
 		<ng-container matColumnDef="inProgressUnits">
