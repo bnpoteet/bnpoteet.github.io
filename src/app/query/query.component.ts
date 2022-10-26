@@ -12,32 +12,19 @@ import { ProjectStatus } from '../project-status';
 })
 
 export class QueryComponent implements OnInit {
-  years: number[] = [];
-  selectedStartYear = 0;
-  selectedEndYear = 0;
   totalUnitCount: number = 0;
   affordableUnitCount: number = 0;
-  startDate: string = '';
-  endDate: string = '';
   includePipeline = true;
   projects: Project[] = [];
 
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.getYears();
     this.getData();
   }
 
-  getYears() {
-    for (let i = 1984; i < 2023; i++) {
-      this.years.push(i);
-    } 
-    this.selectedStartYear = this.years[0];
-    this.selectedEndYear = this.years[this.years.length - 1];
-  }
-
-  onFilterChanged() {
+  onFilterChanged(includePipeline: boolean) {
+    this.includePipeline = includePipeline;
     this.getData();
   }
 
@@ -53,25 +40,7 @@ export class QueryComponent implements OnInit {
           ProjectStatus.ProjectCompleted, 
           ProjectStatus.AffordabilityExpired);
       }
-      if (this.selectedStartYear !== 1984) {
-        filter.startDate = this.selectedStartYear.toString() + '0101';
-      }
-      if (this.selectedEndYear !== new Date().getFullYear()) {
-        filter.endDate = this.selectedEndYear.toString() + '1231';
-      }
       this.projects = this.dataService.filterHousingData(data, filter);
     });
-  }
-  
-  onStartDateChanged(date: string) {
-    this.startDate = date;
-  }
-
-  onEndDateChanged(date: string) {
-    this.endDate = date;
-  }
-
-  onIncludePipeline(includePipeline: boolean) {
-    this.includePipeline = includePipeline;
   }
 }

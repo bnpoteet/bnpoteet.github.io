@@ -13,7 +13,13 @@ h1 {
 a {
   margin: auto;
   max-width: 400px;
-  margin-bottom: 8px;}
+  margin-bottom: 8px;
+}
+
+.checkbox {
+  display:flex;
+  justify-content:center;
+}
 
 .mat-form-field {
   font-size: 14px;
@@ -43,6 +49,10 @@ mat-card {
 
 mat-tab {
   width: 100%;
+}
+
+mat-checkbox {
+  // margin: auto;
 }
 
 app-map {

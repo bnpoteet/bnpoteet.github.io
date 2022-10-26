@@ -1,6 +1,11 @@
 <body>
 	<div>
-		<h1>Austin Affordability Unlocked Projects</h1>	
+		<h1>Austin Affordability Unlocked Projects</h1>
+		<div class="checkbox">
+			<mat-checkbox [checked]="includePipeline" (change)="onFilterChanged($event.checked)">
+				Include planned and under construction projects
+			</mat-checkbox>
+		</div>
 		<mat-tab-group dynamicHeight="true" mat-align-tabs="center">
 			<mat-tab label="Table">
 				<app-project-list [projects]="projects"></app-project-list>
