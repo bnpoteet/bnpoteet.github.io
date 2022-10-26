@@ -83,7 +83,6 @@ export class SummaryComponent implements OnInit, AfterViewInit {
       constructedAffordableUnits: constructedAffordableUnits,
       inProgressProjects: inProgress.length,
       inProgressUnits: inProgressUnits,
-      feeInLieu: feeInLieu
     });
   }
 }

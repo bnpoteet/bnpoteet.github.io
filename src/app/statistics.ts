@@ -4,5 +4,4 @@ export interface Statistics {
 	constructedProjects: number;
 	inProgressProjects: number;
 	inProgressUnits: number;
-	feeInLieu: number;
 }
