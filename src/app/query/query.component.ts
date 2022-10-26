@@ -32,8 +32,6 @@ export class QueryComponent implements OnInit {
     this.dataService.getHousingData().subscribe(data => {
       var filter: Filter = { 
         statuses: [],
-        startDate: '',
-        endDate: ''
       }
       if (!this.includePipeline) {
         filter.statuses.push(
