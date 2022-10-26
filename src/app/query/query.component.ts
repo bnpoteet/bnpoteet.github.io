@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../data.service';
 import { Project } from '../project';
-import { AffordabilityProgram } from '../affordability-program';
 import { Filter } from '../filter';
 import { ProjectStatus } from '../project-status';
 
@@ -13,11 +12,9 @@ import { ProjectStatus } from '../project-status';
 })
 
 export class QueryComponent implements OnInit {
-  affordabilityPrograms = Object.values(AffordabilityProgram);
   years: number[] = [];
   selectedStartYear = 0;
   selectedEndYear = 0;
-  selectedProgram = AffordabilityProgram.All;
   totalUnitCount: number = 0;
   affordableUnitCount: number = 0;
   startDate: string = '';

@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Project } from './project';
-import { AffordabilityProgram } from './affordability-program';
 import { Filter } from './filter';
 
 @Injectable({

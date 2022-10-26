@@ -3,7 +3,6 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../data.service';
 import { Project } from '../project';
 import { Statistics } from '../statistics';
-import { AffordabilityProgram } from '../affordability-program';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 
@@ -43,13 +42,13 @@ export class SummaryComponent implements OnInit, AfterViewInit {
       const dataWithoutDuplicates = [...new Map(data.map(v => [v.project_id, v])).values()];
 
       this.auProjects = dataWithoutDuplicates.filter(project => project.affordability_unlocked === 'Yes');
-      this.parseProgramData(this.auProjects, AffordabilityProgram.affordability_unlocked);
+      this.parseProgramData(this.auProjects);
 
       this.dataSource.data = this.statistics;
     });
   }
 
-  private parseProgramData(programData: Project[], program: AffordabilityProgram): void {
+  private parseProgramData(programData: Project[]): void {
     var constructedUnits = 0;
     var constructedAffordableUnits = 0;
     var feeInLieu = 0;
@@ -79,7 +78,6 @@ export class SummaryComponent implements OnInit, AfterViewInit {
     var inProgress = programData.filter(project => !project.development_status?.startsWith('Project Compl') && !project.development_status?.startsWith('Affordability'));
 
     this.statistics.push({
-      program: program,
       constructedProjects: completed.length,
       constructedUnits: constructedUnits,
       constructedAffordableUnits: constructedAffordableUnits,
