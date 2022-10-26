@@ -42,7 +42,7 @@ export class ChartsComponent implements OnInit, OnChanges {
   updateCharts() {
     this.completedProjectsData.datasets[0].data = [];
     for (let i = 1; i < 11; i++) {
-      var districtProjects = this.projects.filter(project => (Math.floor(project.council_district) == i) && project.development_status === ProjectStatus.ProjectCompleted);
+      var districtProjects = this.projects.filter(project => (Math.floor(project.council_district) == i));
       var unitCount = 0;
       for (const project of districtProjects) {
         unitCount = unitCount + Number(project.total_units);
