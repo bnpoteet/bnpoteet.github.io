@@ -2,7 +2,6 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { Project } from '../project';
-import { ProjectStatus } from '../project-status';
 
 @Component({
   selector: 'app-charts',
@@ -12,8 +11,7 @@ import { ProjectStatus } from '../project-status';
 export class ChartsComponent implements OnInit, OnChanges {
   @Input() projects: Project[] = [];
 
-  @ViewChild(BaseChartDirective) allProjectsChart: BaseChartDirective | undefined;
-  @ViewChild(BaseChartDirective) completedProjectsChart: BaseChartDirective | undefined;
+  @ViewChild(BaseChartDirective) councilDistrictChart: BaseChartDirective | undefined;
 
   public barChartLegend = true;
   public barChartPlugins = [];
@@ -50,6 +48,6 @@ export class ChartsComponent implements OnInit, OnChanges {
       this.completedProjectsData.datasets[0].data.push(unitCount);
     } 
 
-    this.completedProjectsChart?.update();
+    this.councilDistrictChart?.update();
   }
 }
