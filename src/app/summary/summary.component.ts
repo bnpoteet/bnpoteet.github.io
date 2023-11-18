@@ -16,13 +16,7 @@ export class SummaryComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Statistics>();
   statistics: Statistics[] = [];
   displayedColumns: string[] = ['totalUnits', 'totalAffordableUnits', 'projectCount', 'inProgressUnits', 'inProgressProjects'];
-  vmuProjects: Project[] = [];
-  universityProjects: Project[] = [];
-  downtownProjects: Project[] = [];
-  raineyProjects: Project[] = [];
-  transitProjects: Project[] = [];
   auProjects: Project[] = [];
-  riversideProjects: Project[] = [];
 
   @ViewChild(MatSort) sort!: MatSort;
 
