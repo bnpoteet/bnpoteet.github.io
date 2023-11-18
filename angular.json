@@ -126,5 +126,13 @@
       "@angular-eslint/schematics"
     ],
     "analytics": "a02e46b6-c27e-4562-88eb-b5fbce26e7b7"
+  },
+  "schematics": {
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
+    }
   }
 }
