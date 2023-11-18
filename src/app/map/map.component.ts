@@ -64,7 +64,7 @@ export class MapComponent implements OnInit, OnChanges {
           lat: +latitude, 
           lng: +longitude,
         },
-        title: `projectName (${projectStatus})`
+        title: `${projectName} (${projectStatus})`
       } as MapMarker);
     }
   }
