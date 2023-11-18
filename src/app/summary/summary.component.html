@@ -17,12 +17,12 @@
 		</ng-container>
 
 		<ng-container matColumnDef="inProgressUnits">
-			<th mat-header-cell *matHeaderCellDef mat-sort-header> In Planning / Under Construction Units </th>
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> Under Construction Units </th>
 			<td mat-cell class="unit" *matCellDef="let element"> {{element.inProgressUnits | number}} </td>
 		</ng-container>
 
 		<ng-container matColumnDef="inProgressProjects">
-			<th mat-header-cell *matHeaderCellDef mat-sort-header> In Planning / Under Construction Projects </th>
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> Under Construction Projects </th>
 			<td mat-cell class="unit" *matCellDef="let element"> {{element.inProgressProjects | number}} </td>
 		</ng-container>
 

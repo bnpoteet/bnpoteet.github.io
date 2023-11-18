@@ -52,7 +52,7 @@ export class SummaryComponent implements OnInit, AfterViewInit {
     var constructedUnits = 0;
     var constructedAffordableUnits = 0;
     var feeInLieu = 0;
-    var inProgress = programData.filter(project => !project.development_status?.startsWith('Project Compl') && !project.development_status?.startsWith('Affordability'));
+    var inProgress = programData.filter(project => project.development_status === 'Under Construction');
     var completed = programData.filter(project => project.development_status?.startsWith('Project Compl') || project.development_status?.startsWith('Affordability'));
 
     completed.forEach(project => {
@@ -74,9 +74,6 @@ export class SummaryComponent implements OnInit, AfterViewInit {
         inProgressUnits = inProgressUnits + Number(project.total_units);
       }
     });
-
-    var inProgress = programData.filter(project => !project.development_status?.startsWith('Project Compl') && !project.development_status?.startsWith('Affordability'));
-
     this.statistics.push({
       constructedProjects: completed.length,
       constructedUnits: constructedUnits,
