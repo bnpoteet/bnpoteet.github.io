@@ -53,18 +53,18 @@ export class MapComponent implements OnInit, OnChanges {
   updateMarkers(){
     this.markers = []
     this.projects.forEach(project => {
-      this.addMarker(project.latitude, project.longitude, project.project_name);
+      this.addMarker(project.latitude, project.longitude, project.project_name, project.development_status);
     });
   }
 
-  addMarker(latitude: number, longitude: number, projectName: string) {
+  addMarker(latitude: number, longitude: number, projectName: string, projectStatus: string) {
     if (!isNaN(latitude)&& !isNaN(longitude)){
       this.markers.push({
         position: {
           lat: +latitude, 
           lng: +longitude,
         },
-        title: projectName
+        title: `projectName (${projectStatus})`
       } as MapMarker);
     }
   }
