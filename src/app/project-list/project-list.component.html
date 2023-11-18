@@ -6,7 +6,7 @@
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
         
         <ng-container matColumnDef="project_name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Name </th>
+            <th mat-header-cell *matHeaderCellDef> Project Name </th>
             <td mat-cell *matCellDef="let element"> {{ element.project_name }} </td>
             <td mat-footer-cell *matFooterCellDef> 
                 <b>Queried Total</b>
@@ -14,7 +14,7 @@
         </ng-container>
 
         <ng-container matColumnDef="address">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+            <th mat-header-cell *matHeaderCellDef> Address </th>
             <td mat-cell *matCellDef="let element"> 
                 <a href="{{ getMapLink(element.address) }}">{{ element.address }}</a> 
             </td>
@@ -27,18 +27,18 @@
         </ng-container>
 
         <ng-container matColumnDef="total_affordable_units">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Affordable Units </th>
+            <th mat-header-cell *matHeaderCellDef> Affordable Units </th>
             <td class="unit" mat-cell *matCellDef="let element"> {{ element.affordable_units | number }} </td>
             <td class="unit" mat-footer-cell *matFooterCellDef> {{ affordableUnitCount | number }} </td>
         </ng-container>
 
         <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <th mat-header-cell *matHeaderCellDef> Status </th>
             <td mat-cell *matCellDef="let element"> {{ element.development_status }} </td>
         </ng-container>
 
         <ng-container matColumnDef="developer">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Developer </th>
+            <th mat-header-cell *matHeaderCellDef> Developer </th>
             <td mat-cell *matCellDef="let element"> {{ element.developer }} </td>
         </ng-container>
 

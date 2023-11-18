@@ -27,7 +27,6 @@ export class SummaryComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // TODO: fix sorting
     this.dataSource.sort = this.sort;
   }
 
